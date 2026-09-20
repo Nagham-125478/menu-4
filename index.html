@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منيو الوجبات السريعة التفاعلي</title>
+    <!-- خط Tajawal من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- الهيدر العلوي -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <i class="fa-solid fa-burger logo-icon"></i>
+                <div>
+                    <h1>اكلات سريعة🍔</h1>
+                    <p>أطيب الوجبات السريعة بلمسة واحدة</p>
+                </div>
+            </div>
+            <button class="cart-btn-header" onclick="toggleCart()">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-badge" class="badge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- أزرار الأقسام -->
+    <nav class="categories-nav">
+        <button class="cat-btn active" onclick="filterCategory('all', this)">الكل 🍟</button>
+        <button class="cat-btn" onclick="filterCategory('burger', this)">برجر 🍔</button>
+        <button class="cat-btn" onclick="filterCategory('meals', this)">وجبات بروستد 🍗</button>
+        <button class="cat-btn" onclick="filterCategory('sandwiches', this)">سندويشات 🌯</button>
+        <button class="cat-btn" onclick="filterCategory('sides', this)">مقبلات ومشروبات 🥤</button>
+    </nav>
+
+    <!-- شبكة المنتجات -->
+    <main class="menu-container" id="menu-grid">
+        <!-- سيتم توليد العناصر ديناميكياً بواسطة JavaScript -->
+    </main>
+
+    <!-- سلة الطلبات (Sidebar / Modal) -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    
+    <aside class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-basket-shopping"></i> سلة الطلبات</h3>
+            <button class="close-btn" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="cart-items" id="cart-items-container">
+            <!-- عناصر السلة تُضاف هنا -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="total-row">
+                <span>المجموع الإجمالي:</span>
+                <span id="cart-total-price" class="total-amount">0.00 د.أ</span>
+            </div>
+
+            <!-- طريقة الدفع -->
+            <div class="payment-section">
+                <label class="section-title"><i class="fa-regular fa-credit-card"></i> طريقة الدفع:</label>
+                <div class="payment-options">
+                    <label class="pay-option">
+                        <input type="radio" name="payment_method" value="نقداً عند الاستلام" checked onchange="toggleCliqDetails()">
+                        <span><i class="fa-solid fa-money-bill-wave"></i> نقداً عند الاستلام</span>
+                    </label>
+                    <label class="pay-option">
+                        <input type="radio" name="payment_method" value="كليك (CliQ)" onchange="toggleCliqDetails()">
+                        <span><i class="fa-solid fa-mobile-screen-button"></i> كليك (CliQ)</span>
+                    </label>
+                </div>
+                
+                <!-- تفاصيل CliQ بدون كلمة المحفظة ومع زر نسخ -->
+                <div id="cliq-details" class="cliq-box hidden">
+                    <p>اسم الحساب: <strong>FASTFOOD-MENU</strong></p>
+                    <div class="cliq-number-row">
+                        <span>رقم CliQ: <strong id="cliq-number">0790000000</strong></span>
+                        <button class="copy-btn" onclick="copyCliqNumber()">
+                            <i class="fa-regular fa-copy"></i> نسخ
+                        </button>
+                    </div>
+                    <small>* يرجى إرفاق إشعار التحويل بعد إرسال الطلب.</small>
+                </div>
+            </div>
+
+            <!-- ملاحظات الطلب -->
+            <div class="notes-section">
+                <textarea id="order-notes" placeholder="ملاحظات إضافية (بدون بصل، زيادة صوص...)"></textarea>
+            </div>
+
+            <!-- زر الإرسال -->
+            <button class="send-whatsapp-btn" onclick="sendOrderToWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> تأكيد وإرسال الطلب عبر الواتساب
+            </button>
+        </div>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+</html>
